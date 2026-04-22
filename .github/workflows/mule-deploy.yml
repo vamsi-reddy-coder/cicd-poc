@@ -2,11 +2,12 @@ name: MuleSoft CloudHub CI/CD
 
 on:
   push:
-    branches: [ "main","dev" ] # Triggers only on push to main
+    branches: [ "main", "dev" ]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -18,27 +19,11 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
 
-      # Dynamically create settings.xml using GitHub Secrets
-      - name: Create Maven settings.xml
-        run: |
-          mkdir -p ~/.m2
-          cat <<EOF > ~/.m2/settings.xml
-          <settings>
-            <servers>
-              <server>
-                <id>anypoint-exchange-v3</id>
-                <username>--Client--</username>
-                <password>${{ secrets.ANYPOINT_CLIENT_SECRET }}</password>
-              </server>
-            </servers>
-          </settings>
-          EOF
-
       - name: Build and Deploy to CloudHub
         run: |
           mvn clean deploy -DmuleDeploy \
-          -DconnectedAppClientId=8ca7bc038de1468bb453aaac00c9b8bc \
-          -DconnectedAppClientSecret=F436bb28418641c38C0e7dD4e92Fd901 \
-          -DconnectedAppGrantType=client_credentials \
-          -Denv=Sandbox \
-          -DskipTests
+            -DconnectedAppClientId=${{ secrets.ANYPOINT_CLIENT_ID }} \
+            -DconnectedAppClientSecret=${{ secrets.ANYPOINT_CLIENT_SECRET }} \
+            -DconnectedAppGrantType=client_credentials \
+            -Denv=Sandbox \
+            -DskipTests
