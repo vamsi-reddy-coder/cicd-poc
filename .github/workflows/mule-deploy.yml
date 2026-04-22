@@ -28,7 +28,7 @@ jobs:
               <server>
                 <id>anypoint-exchange-v3</id>
                 <username>--Client--</username>
-                <password>8ca7bc038de1468bb453aaac00c9b8bc~?~F436bb28418641c38C0e7dD4e92Fd901</password>
+                <password>${{ secrets.ANYPOINT_CLIENT_SECRET }}</password>
               </server>
             </servers>
           </settings>
@@ -37,5 +37,8 @@ jobs:
       - name: Build and Deploy to CloudHub
         run: |
           mvn clean deploy -DmuleDeploy \
-            -Denv=Sandbox \
-            -DskipTests
+          -DconnectedAppClientId=8ca7bc038de1468bb453aaac00c9b8bc \
+          -DconnectedAppClientSecret=F436bb28418641c38C0e7dD4e92Fd901 \
+          -DconnectedAppGrantType=client_credentials \
+          -Denv=Sandbox \
+          -DskipTests
