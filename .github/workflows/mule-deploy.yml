@@ -2,7 +2,7 @@ name: MuleSoft CloudHub CI/CD
 
 on:
   push:
-    branches: [ "main" ] # Triggers only on push to main
+    branches: [ "main","dev" ] # Triggers only on push to main
 
 jobs:
   deploy:
