@@ -27,17 +27,12 @@ jobs:
             <servers>
               <server>
                 <id>anypoint-exchange-v3</id>
-                <username>\${{ secrets.ANYPOINT_USERNAME }}</username>
-                <password>\${{ secrets.ANYPOINT_PASSWORD }}</password>
-              </server>
-              <server>
-                <id>MuleRepository</id>
-                <username>\${{ secrets.MULE_REPO_USERNAME }}</username>
-                <password>\${{ secrets.MULE_REPO_PASSWORD }}</password>
+                <username>--Client--/username>
+                <password>8ca7bc038de1468bb453aaac00c9b8bc~?~F436bb28418641c38C0e7dD4e92Fd901</password>
               </server>
             </servers>
           </settings>
-          EOF
+          
 
       - name: Build and Deploy to CloudHub
         run: |
