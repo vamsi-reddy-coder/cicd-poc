@@ -37,7 +37,5 @@ jobs:
       - name: Build and Deploy to CloudHub
         run: |
           mvn clean deploy -DmuleDeploy \
-            -Danypoint.username=${{ secrets.ANYPOINT_USERNAME }} \
-            -Danypoint.password=${{ secrets.ANYPOINT_PASSWORD }} \
             -Denv=Sandbox \
             -DskipTests
