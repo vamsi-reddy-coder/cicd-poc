@@ -1,0 +1,48 @@
+name: MuleSoft CloudHub CI/CD
+
+on:
+  push:
+    branches: [ "main" ] # Triggers only on push to main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: 'maven'
+
+      # Dynamically create settings.xml using GitHub Secrets
+      - name: Create Maven settings.xml
+        run: |
+          mkdir -p ~/.m2
+          cat <<EOF > ~/.m2/settings.xml
+          <settings>
+            <servers>
+              <server>
+                <id>anypoint-exchange-v3</id>
+                <username>\${{ secrets.ANYPOINT_USERNAME }}</username>
+                <password>\${{ secrets.ANYPOINT_PASSWORD }}</password>
+              </server>
+              <server>
+                <id>MuleRepository</id>
+                <username>\${{ secrets.MULE_REPO_USERNAME }}</username>
+                <password>\${{ secrets.MULE_REPO_PASSWORD }}</password>
+              </server>
+            </servers>
+          </settings>
+          EOF
+
+      - name: Build and Deploy to CloudHub
+        run: |
+          mvn clean deploy -DmuleDeploy \
+            -Danypoint.username=${{ secrets.ANYPOINT_USERNAME }} \
+            -Danypoint.password=${{ secrets.ANYPOINT_PASSWORD }} \
+            -Denv=Sandbox \
+            -DskipTests
