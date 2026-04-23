@@ -43,7 +43,7 @@
                         <uri>https://anypoint.mulesoft.com</uri>
                         <provider>MC</provider>
                         <environment>${env}</environment>
-                        <target>Cloudhub-US-East-1</target>
+                        <target>Cloudhub-US-East-2</target>
                         <muleVersion>${app.runtime}</muleVersion>
                         <connectedAppClientId>${connectedAppClientId}</connectedAppClientId>
                         <connectedAppClientSecret>${connectedAppClientSecret}</connectedAppClientSecret>
