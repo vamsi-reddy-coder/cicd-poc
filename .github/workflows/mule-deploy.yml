@@ -21,7 +21,7 @@ jobs:
 
       - name: Publish to Exchange
         run: |
-          mvn deploy --settings .maven/settings.xml -DskipTests -Dclient.id="${{ secrets.CONNECTED_APP_CLIENT_ID }}" -Dclient.secret="${{ secrets.CONNECTED_APP_CLIENT_SECRET }}"
+          mvn deploy  -DskipTests -Dclient.id="${{ secrets.CONNECTED_APP_CLIENT_ID }}" -Dclient.secret="${{ secrets.CONNECTED_APP_CLIENT_SECRET }}"
       - name: Deploy to CloudHub 2.0
         run: |
-          mvn mule:deploy --settings .maven/settings.xml -DskipTests -Dclient.id="${{ secrets.CONNECTED_APP_CLIENT_ID }}" -Dclient.secret="${{ secrets.CONNECTED_APP_CLIENT_SECRET }}"
+          mvn mule:deploy  -DskipTests -Dclient.id="${{ secrets.CONNECTED_APP_CLIENT_ID }}" -Dclient.secret="${{ secrets.CONNECTED_APP_CLIENT_SECRET }}"
