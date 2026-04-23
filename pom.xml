@@ -3,19 +3,21 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>957529d4-51f1-4301-97f2-c52847994d4c</groupId>
-    <artifactId>sample</artifactId>
+    <artifactId>github-cicd</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>mule-application</packaging>
 
     <name>cicd-poc</name>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <app.runtime>4.11.3:4e</app.runtime>
-        <app.name>cicd-poc</app.name>
-        <mule.maven.plugin.version>4.6.1</mule.maven.plugin.version>
-    </properties>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+		<app.runtime>4.10.1</app.runtime>
+		<mule.runtime.version>4.4.0</mule.runtime.version>
+		<mule.maven.plugin.version>4.6.1</mule.maven.plugin.version>
+		<munit.version>3.6.2</munit.version>
+	</properties>
 
     <distributionManagement>
         <repository>
@@ -41,8 +43,9 @@
                 <configuration>
                     <cloudhub2Deployment>
                         <uri>https://anypoint.mulesoft.com</uri>
+                        <businessGroupId>${project.groupId}</businessGroupId>
                         <provider>MC</provider>
-                        <environment>${env}</environment>
+                        <environment>Sandbox</environment>
                         <target>Cloudhub-US-East-2</target>
                         <muleVersion>${app.runtime}</muleVersion>
                         <connectedAppClientId>${connectedAppClientId}</connectedAppClientId>
