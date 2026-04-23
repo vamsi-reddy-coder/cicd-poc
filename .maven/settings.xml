@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<settings>
+
+	<pluginGroups>
+		<pluginGroup>org.mule.tools</pluginGroup>
+	</pluginGroups>
+
+	<servers>
+		<server>
+			<id>Repository</id>
+			<username>~~~Client~~~</username>
+			<password>${client.id}~?~${client.secret}</password>
+		</server>
+		<server>
+			<id>anypoint-exchange-v3</id>
+			<username>~~~Client~~~</username>
+			<password>${client.id}~?~${client.secret}</password>
+		</server>
+		<server>
+			<username>${nexus_username}</username>
+			<password>${nexus_password}</password>
+			<id>mulesoft-ee</id>
+		</server>
+	</servers>
+	
+	<profiles>
+		<profile>
+			<id>anypoint</id>
+			<activation>
+        		<activeByDefault>true</activeByDefault>
+      		</activation>
+			<repositories>
+				<repository>
+					<id>anypoint-exchange-v3</id>
+					<url>https://maven.anypoint.mulesoft.com/api/v3/maven</url>
+				</repository>
+				<repository>
+					<id>Repository</id>
+					<url>https://maven.anypoint.mulesoft.com/api/v3/organizations/957529d4-51f1-4301-97f2-c52847994d4c/maven</url>
+				</repository>
+				<repository>
+					<id>mulesoft-ee</id>
+					<name>Mule Repository</name>
+					<url>https://repository.mulesoft.org/nexus-ee/content/repositories/releases-ee/</url>
+				</repository>
+			</repositories>
+			
+			<pluginRepositories>
+				<pluginRepository>
+					<id>anypoint-exchange-v3</id>
+					<url>https://maven.anypoint.mulesoft.com/api/v3/maven</url>
+				</pluginRepository>
+			</pluginRepositories>
+		</profile>
+	</profiles>
+	
+	<activeProfiles>
+		<activeProfile>anypoint</activeProfile>
+	</activeProfiles>
+
+</settings>
