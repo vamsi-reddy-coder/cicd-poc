@@ -19,11 +19,9 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
 
-      - name: Build and Deploy to CloudHub
+      - name: Publish to Exchange
         run: |
-          mvn clean deploy -DmuleDeploy \
-            -DconnectedAppClientId=${{ secrets.ANYPOINT_CLIENT_ID }} \
-            -DconnectedAppClientSecret=${{ secrets.ANYPOINT_CLIENT_SECRET }} \
-            -DconnectedAppGrantType=client_credentials \
-            -Denv=Sandbox \
-            -DskipTests
+          mvn deploy --settings .maven/settings.xml -DskipTests -Dclient.id="${{ secrets.CONNECTED_APP_CLIENT_ID }}" -Dclient.secret="${{ secrets.CONNECTED_APP_CLIENT_SECRET }}"
+      - name: Deploy to CloudHub 2.0
+        run: |
+          mvn mule:deploy --settings .maven/settings.xml -DskipTests -Dclient.id="${{ secrets.CONNECTED_APP_CLIENT_ID }}" -Dclient.secret="${{ secrets.CONNECTED_APP_CLIENT_SECRET }}"
