@@ -12,9 +12,9 @@
 			<password>${client.id}~?~${client.secret}</password>
 		</server>
 		<server>
-			<id>anypoint-exchange-v3</id>
-			<username>~~~Client~~~</username>
-			<password>${client.id}~?~${client.secret}</password>
+		    <id>anypoint-exchange-v3</id>
+		    <username>~~~Client~~~</username>
+		    <password>${connectedAppClientId}~?~${connectedAppClientSecret}</password>
 		</server>
 		<!-- <server>
 			<username>${nexus_username}</username>
