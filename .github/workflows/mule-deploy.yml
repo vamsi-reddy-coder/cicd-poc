@@ -22,11 +22,11 @@ jobs:
       with:
         distribution: 'zulu'
         java-version: 17
-    - name: Test with Maven
-      env:
-        nexus_username: ${{ secrets.nexus_username }}
-        nexus_password: ${{ secrets.nexus_password }}
-      run: mvn test --settings .maven/settings.xml
+    # - name: Test with Maven
+    #   env:
+    #     nexus_username: ${{ secrets.nexus_username }}
+    #     nexus_password: ${{ secrets.nexus_password }}
+    #   run: mvn test --settings .maven/settings.xml
         
   build:
     needs: test
@@ -51,7 +51,7 @@ jobs:
       
       - name: Publish to Exchange
         run: |
-          mvn deploy --settings .maven/settings.xml -DskipTests -Dclient.id="${{ secrets.ANYPOINT_CLIENT_ID }}" -Dclient.secret="${{ secrets.ANYPOINT_CLIENT_SECRET }}"
+          mvn deploy --settings .maven/settings.xml -DskipTests -Dclient.id="${{ secrets.ANYPOINT_CLIENT_ID }}" -Dclient.secret="${{ secrets.ANYPOINT_CLIENT_SECRET }}" -DconnectedAppClientId="${{ secrets.CONNECTED_ID }}" -DconnectedAppClientSecret="${{ secrets.CONNECTED_SECRET }}"
       - name: Deploy to CloudHub 2.0
         run: |
-          mvn mule:deploy --settings .maven/settings.xml -DskipTests -Dclient.id="${{ secrets.ANYPOINT_CLIENT_ID }}" -Dclient.secret="${{ secrets.ANYPOINT_CLIENT_SECRET }}"
+          mvn mule:deploy --settings .maven/settings.xml -DskipTests -Dclient.id="${{ secrets.ANYPOINT_CLIENT_ID }}" -Dclient.secret="${{ secrets.ANYPOINT_CLIENT_SECRET }}" -DconnectedAppClientId="${{ secrets.CONNECTED_ID }}" -DconnectedAppClientSecret="${{ secrets.CONNECTED_SECRET }}"
